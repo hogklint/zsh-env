@@ -68,7 +68,7 @@ function precmd()
     export PROMPT="%B%F${prompt_color}%n@%m%k%B%F ${RED}$(__git_ps1 '[%s]') ${fg_blue} %# %b%f%k"
   fi
 
-  xrp="`extended_rprompt 2> /dev/null`"
+  xrp="$(extended_rprompt 2> /dev/null)"
   if [ 0 -eq $? ];
   then
     export RPROMPT="%F${fg_green}%~${xrp}%f"
@@ -90,3 +90,6 @@ then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.zsh/completion/zsh-interactive-cd.plugin.zsh ] && source  ~/.zsh/completion/zsh-interactive-cd.plugin.zsh
+
+#if [ -e /home/jimmieh/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jimmieh/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

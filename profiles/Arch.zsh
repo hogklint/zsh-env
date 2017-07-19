@@ -1,3 +1,8 @@
+alias reboot='systemctl reboot'
+alias sd='systemctl poweroff'
+alias suspend='systemctl suspend'
+alias chrome='chromium'
+
 lastupdate()
 {
   local readonly date="`grep "starting full system upgrade" /var/log/pacman.log | tail -1 | grep -Eo '[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}'`"
@@ -13,3 +18,4 @@ lastupdate()
 }
 
 lastupdate
+
