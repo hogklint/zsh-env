@@ -1,12 +1,8 @@
 export prompt_color="$fg_brown"
 export TERM=dtterm
-#export TERMINFO=/home/jhogklin/.terminfo
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/temp/lib:/usr/lib:$HOME/local/lib
 
 export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
 export FZF_DEFAULT_COMMAND='ag -g "" --ignore "*Test.[ch]pp" --ignore "*\.$"'
-
-export OUT_DIR_COMMON_BASE=$HOME/android_out
 
 export USE_CCACHE="Y"
 
@@ -18,21 +14,16 @@ then
   alias tl='tmuxifier load-window'
 fi
 
-if [ -d "$HOME/local/dltviewer/usr" ];
-then
-  export PATH="$PATH:$HOME/local/dltviewer/usr/bin"
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/dltviewer/usr/lib
-fi
+#if [ -d "$HOME/local/dltviewer/usr" ];
+#then
+#  export PATH="$PATH:$HOME/local/dltviewer/usr/bin"
+#  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/dltviewer/usr/lib
+#fi
 
 if [ -d "$HOME/local/android" ];
 then
-  export PATH="$PATH:$HOME/local/android"
+  export PATH="$HOME/local/android:$PATH"
 fi
-
-#if [ -f "$HOME/.asdf4_params" ]
-#then
-#    source "$HOME/.asdf4_params"
-#fi
 
 # autocompletion colors
 eval `dircolors -b`
@@ -50,6 +41,7 @@ then
 fi
 
 source $HOME/.${CURRENTPROJ}_params
+export PATH="$AOSP_HOME/out/host/linux-x86/bin:$PATH"
 
 ##################
 # Functions
@@ -80,13 +72,42 @@ man()
       man "$@"
 }
 
+get_git()
+{
+    if [ $# -ne 1 ]
+    then
+        echo "get_git <repo name>" 2>/dev/null
+        exit 1
+    fi
+
+    git clone ssh://$NETID@10.236.95.27:29418/$1 && scp -p -P 29418 $NETID@10.236.95.27:hooks/commit-msg $1/.git/hooks/
+}
+
+function run_adb_shell()
+{
+    BUFFER="adb shell $BUFFER"
+    zle accept-line
+}
+
+zle -N run_adb_shell
+bindkey "^K" run_adb_shell
+
+function sme()
+{
+    bash --rcfile <(echo "\
+        source $HOME/.bashrc && \
+        pushd $AOSP_HOME && \
+        source build/envsetup.sh && \
+        lunch $LUNCH_IT && \
+        popd")
+}
+
 ##################
 # End Functions
 ##################
 
 #alias runctags='ctags -R --exclude="*test*" --exclude="*[Ss]tub*" --exclude="*ctcif*" --exclude="*include*"'
-alias myps='ps -leaf | grep jhogklin'
-#alias chrome='chromium-browser  --proxy-server=http://webproxy.scan.bombardier.com'
+alias myps="ps -leaf | grep $USER"
 alias rmorig='rm **/*.orig'
 
 alias ssdk="source $ASDF4_SOURCE"
@@ -95,10 +116,11 @@ alias win='cd /mnt/c/Users/JimmieH'
 alias vcm_serial='picocom -b 115200 /dev/ttyUSB'
 
 # navigation
-alias a='cd $AOSP_HOME'
+alias h='cd $AOSP_HOME'
 alias d='cd $AOSP_HOME/device/ccompany'
-alias tt='cd $AOSP_HOME/device/ccompany/asdf1_p2952'
-alias vc='cd $AOSP_HOME/device/ccompany/volvoasdf4'
+alias a='cd $AOSP_HOME/device/acompany'
+alias c='cd $AOSP_HOME/vendor/acompany/components'
+alias p='cd $PRODUCT_HOME'
 
 # tmux alias
 alias asdf41='tmuxifier load-session asdf41'
@@ -107,17 +129,26 @@ alias asdf21='tmuxifier load-session asdf21'
 alias asdf22='tmuxifier load-session asdf22'
 
 # Build AOSP
-alias ah='android_wrapper_host'
-alias m='android_wrapper_host m'
-alias mm='android_wrapper_host mm'
-alias mmm='android_wrapper_host mmm'
-alias hmm='android_wrapper_host hmm'
+alias rr='run_remote'
+alias m='run_remote m'
+alias mm='run_remote mm'
+alias mma='run_remote mma'
+alias mmm='run_remote mmm'
+alias mmma='run_remote mmma'
+alias hmm='run_remote hmm'
+alias repo='run_remote repo'
+
+alias rmout='run_remote rm -rf out'
+alias init_asdf2='run_remote repo init -u ssh://$NETID@10.236.95.27:29418/asdf1_p2952_manifests -b master -m devel-o.xml --reference=/home/common/mirrors/asdf2'
+alias init_asdf4='run_remote repo init -u ssh://$NETID@10.236.95.27:29418/Android_bsd_manifest -b devel -m ASDF4_android-O-devel.xml --repo-url=http://10.236.88.232/git/git-repo --no-repo-verify --reference=/home/common/mirrors/asdf4'
+alias core='ssh core-build-01'
+
+alias reboot='shutdown_win7 && systemctl reboot'
+alias sd='shutdown_win7 && systemctl poweroff'
+alias stopflicker='xrandr --output DP1-2 --off && setmonitor.sh'
 
 if [[ -z "$DISPLAY" && $(tty) == /dev/tty1 ]]
 then
     startx
 fi
 
-#export http_proxy=10.236.88.106:80
-#export http_proxy=asdf2egot-pr02.bcompany.net
-#export https_proxy=asdf2egot-pr02.bcompany.net
