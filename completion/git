@@ -209,9 +209,10 @@ __git_ps1 ()
 			fi
 
 			if [ -n "${GIT_PS1_SHOWUNTRACKEDFILES-}" ]; then
-				if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-					u="¤"
-				fi
+                # This if is slow when on NFS
+				#if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+				#	u="¤"
+				#fi
 			fi
 
 			if [ -n "${GIT_PS1_SHOWUPSTREAM-}" ]; then
