@@ -7,6 +7,8 @@ alias rm='rm -i'
 alias l='ls -hl --color=auto'
 alias la='ls -hla --color=auto'
 alias gs='git status'
+alias gd='git diff'
+alias gg='git grep -W'
 
 bindkey -e
 bindkey "^W" "vi-backward-kill-word"
@@ -21,8 +23,8 @@ promptinit
 
 export EDITOR=vim
 export PAGER=less
-export HISTSIZE=2000
-export SAVEHIST=20000
+export HISTSIZE=2000000
+export SAVEHIST=2000000
 export HISTFILE=~/.zhistory
 
 setopt cshjunkiequotes #command must match qoutes
@@ -31,6 +33,8 @@ setopt extended_history
 setopt inc_append_history
 setopt hist_ignore_space
 setopt hist_ignore_dups
+setopt hist_find_no_dups
+setopt hist_expire_dups_first
 
 if [ -d "$HOME/local/bin" ];
 then
@@ -76,6 +80,12 @@ function precmd()
 
 }
 
+DIST=`cat /etc/os-release | grep NAME | grep -Eo "Arch|Gentoo" | head -1`
+if [[ -f "$HOME/.zsh/profiles/$DIST.zsh" ]]
+then
+  source $HOME/.zsh/profiles/$DIST.zsh 2> /dev/null
+fi
+
 HOST=`hostname`
 if [[ -f "$HOME/.zsh/profiles/$HOST.zsh" ]]
 then
@@ -83,13 +93,5 @@ then
 fi
 
 #cat /etc/os-release | grep NAME | cut -d'"' -f 2
-DIST=`cat /etc/os-release | grep NAME | grep -Eo "Arch|Gentoo" | head -1`
-if [[ -f "$HOME/.zsh/profiles/$DIST.zsh" ]]
-then
-  source $HOME/.zsh/profiles/$DIST.zsh 2> /dev/null
-fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#[ -f ~/.zsh/completion/zsh-interactive-cd.plugin.zsh ] && source  ~/.zsh/completion/zsh-interactive-cd.plugin.zsh
 
-#if [ -e /home/jimmieh/.nix-profile/etc/profile.d/nix.sh ]; then . /home/jimmieh/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
