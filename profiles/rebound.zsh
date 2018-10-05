@@ -1,4 +1,4 @@
-alias irc='~/apps/tmuxinit.sh'
+alias irc='~/local/bin/tmuxinit.sh'
 alias torrent='tmux attach -d -t torrent'
 alias prog='tmux attach -d -t prog'
 
