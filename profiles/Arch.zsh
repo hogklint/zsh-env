@@ -1,4 +1,5 @@
-alias reboot='systemctl reboot'
+alias rb='systemctl reboot'
+alias reboot='echo "reboot eh?"'
 alias sd='systemctl poweroff'
 alias suspend='systemctl suspend'
 alias chrome='chromium'

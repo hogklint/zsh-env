@@ -41,7 +41,7 @@ then
 fi
 
 source $HOME/.${CURRENTPROJ}_params
-export PATH="$AOSP_HOME/out/host/linux-x86/bin:$PATH"
+#export PATH="$AOSP_HOME/out/host/linux-x86/bin:$PATH"
 
 ##################
 # Functions
@@ -102,6 +102,16 @@ function sme()
         popd")
 }
 
+function pushsel()
+{
+    local readonly selinux_dir="$AOSP_HOME/out/target/product/$PROJ_DEVICE/vendor/etc/selinux"
+    [ -d $selinux_dir ] || { echo "error: Directory not found $selinux_dir"; exit 1 }
+    b :
+    adb remount
+    adb push $AOSP_HOME/out/target/product/$PROJ_DEVICE/vendor/etc/selinux /vendor/etc
+    adb reboot
+}
+
 ##################
 # End Functions
 ##################
@@ -117,10 +127,12 @@ alias vcm_serial='picocom -b 115200 /dev/ttyUSB'
 
 # navigation
 alias h='cd $AOSP_HOME'
-alias d='cd $AOSP_HOME/device/ccompany'
+alias d='cd $AOSP_HOME/device/ccompany/volvoasdf4'
 alias a='cd $AOSP_HOME/device/acompany'
 alias c='cd $AOSP_HOME/vendor/acompany/components'
 alias p='cd $PRODUCT_HOME'
+alias mani='cd $AOSP_HOME/.repo/manifests'
+alias vm='vim $AOSP_HOME/.repo/manifest.xml'
 
 # tmux alias
 alias asdf41='tmuxifier load-session asdf41'
@@ -142,8 +154,9 @@ alias rmout='run_remote rm -rf out'
 alias init_asdf2='run_remote repo init -u ssh://$NETID@10.236.95.27:29418/asdf1_p2952_manifests -b master -m devel-o.xml --reference=/home/common/mirrors/asdf2'
 alias init_asdf4='run_remote repo init -u ssh://$NETID@10.236.95.27:29418/Android_bsd_manifest -b devel -m ASDF4_android-O-devel.xml --repo-url=http://10.236.88.232/git/git-repo --no-repo-verify --reference=/home/common/mirrors/asdf4'
 alias core='ssh core-build-01'
+alias aag='ag --ignore out --ignore cts'
 
-alias reboot='shutdown_win7 && systemctl reboot'
+alias rb='shutdown_win7 && systemctl reboot'
 alias sd='shutdown_win7 && systemctl poweroff'
 alias stopflicker='xrandr --output DP1-2 --off && setmonitor.sh'
 
