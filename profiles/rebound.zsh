@@ -2,6 +2,9 @@ alias irc='~/local/bin/tmuxinit.sh'
 alias torrent='tmux attach -d -t torrent'
 alias prog='tmux attach -d -t prog'
 
+export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
+export FZF_DEFAULT_COMMAND='ag -g "" --ignore "*Test.[ch]pp" --ignore "*\.$"'
+
 #alias extended_rprompt='echo " ${fg_red}[${fg_blue}$TEST${fg_red}]"'
 export prompt_color="${fg_green}"
 
