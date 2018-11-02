@@ -1,6 +1,7 @@
-alias rb='systemctl reboot'
 alias reboot='echo "reboot eh?"'
-alias sd='systemctl poweroff'
+alias shutdown='echo "shutdown eh?"'
+alias rb='pkill -SIGTERM chromium; systemctl reboot'
+alias sd='pkill -SIGTERM chromium; systemctl poweroff'
 alias suspend='systemctl suspend'
 alias chrome='chromium'
 
