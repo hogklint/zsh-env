@@ -113,6 +113,8 @@ function pushsel()
     local readonly selinux_dir="$AOSP_HOME/out/target/product/$PROJ_DEVICE/vendor/etc/selinux"
     [ -d $selinux_dir ] || { echo "error: Directory not found $selinux_dir"; exit 1 }
     b :
+    adb root
+    b :
     adb remount
     adb push $AOSP_HOME/out/target/product/$PROJ_DEVICE/vendor/etc/selinux /vendor/etc
     adb reboot
@@ -138,6 +140,7 @@ alias a='cd $AOSP_HOME/device/acompany'
 alias c='cd $AOSP_HOME/vendor/acompany/components'
 alias p='cd $PRODUCT_HOME'
 alias mani='cd $AOSP_HOME/.repo/manifests'
+alias se='cd $AOSP_HOME/system/sepolicy'
 alias vm='vim $AOSP_HOME/.repo/manifest.xml'
 
 # tmux alias
@@ -160,11 +163,15 @@ alias rmout='run_remote rm -rf out'
 alias init_asdf2='run_remote repo init -u ssh://$NETID@10.236.95.27:29418/asdf1_p2952_manifests -b master -m devel-o.xml --reference=/home/common/mirrors/asdf2'
 alias init_asdf4='run_remote repo init -u ssh://$NETID@10.236.95.27:29418/Android_bsd_manifest -b devel -m ASDF4_android-O-devel.xml --repo-url=http://10.236.88.232/git/git-repo --no-repo-verify --reference=/home/common/mirrors/asdf4'
 alias core='ssh core-build-01'
-alias aag='ag --ignore out --ignore cts'
+alias aga='ag --ignore out --ignore cts --ignore tests'
+alias agse='ag --ignore prebuilts'
+alias agmb='ag -G "\.bp$|\.mk$"'
 
-alias rb='{ [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl reboot'
-alias sd='{ [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl poweroff'
-alias stopflicker='xrandr --output DP1-2 --off && setmonitor.sh'
+alias rb='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl reboot'
+alias sd='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl poweroff'
+alias stopflicker='xrandr --output DP1-2-1-8 --off && setmonitor.sh'
+alias update_adb='cp ~/$AOSP_HOME/out/host/linux-x86/bin/{adb,fastboot,mke2fs} ~/local/android'
+
 
 if [[ -z "$DISPLAY" && $(tty) == /dev/tty1 ]]
 then
