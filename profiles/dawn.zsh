@@ -86,7 +86,7 @@ get_git()
         exit 1
     fi
 
-    git clone ssh://$NETID@10.236.95.27:29418/$1 && scp -p -P 29418 $NETID@10.236.95.27:hooks/commit-msg $1/.git/hooks/
+    git clone ssh://gerrit/$1 && scp -p gerrit:hooks/commit-msg $1/.git/hooks/
 }
 
 function run_adb_shell()
@@ -120,6 +120,11 @@ function pushsel()
     adb reboot
 }
 
+function agseall
+{
+    ag --ignore prebuilts "$@" $AOSP_HOME/system/sepolicy $AOSP_HOME/device/intel/sepolicy $PRODUCT_HOME/**/sepolicy
+}
+
 ##################
 # End Functions
 ##################
@@ -127,6 +132,7 @@ function pushsel()
 #alias runctags='ctags -R --exclude="*test*" --exclude="*[Ss]tub*" --exclude="*ctcif*" --exclude="*include*"'
 alias myps="ps -leaf | grep $USER"
 alias rmorig='rm **/*.orig'
+alias db="docker_build"
 
 alias ssdk="source $ASDF4_SOURCE"
 alias sutsdk="source $ASDF4_UT_SOURCE"
@@ -157,11 +163,9 @@ alias mma='run_remote mma'
 alias mmm='run_remote mmm'
 alias mmma='run_remote mmma'
 alias hmm='run_remote hmm'
-alias repo='run_remote repo'
+#alias repo='run_remote repo'
 
 alias rmout='run_remote rm -rf out'
-alias init_asdf2='run_remote repo init -u ssh://$NETID@10.236.95.27:29418/asdf1_p2952_manifests -b master -m devel-o.xml --reference=/home/common/mirrors/asdf2'
-alias init_asdf4='run_remote repo init -u ssh://$NETID@10.236.95.27:29418/Android_bsd_manifest -b devel -m ASDF4_android-O-devel.xml --repo-url=http://10.236.88.232/git/git-repo --no-repo-verify --reference=/home/common/mirrors/asdf4'
 alias core='ssh core-build-01'
 alias aga='ag --ignore out --ignore cts --ignore tests'
 alias agse='ag --ignore prebuilts'
