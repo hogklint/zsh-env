@@ -65,19 +65,20 @@ GIT_PS1_SHOWCOLORHINTS=true
 
 function precmd()
 {
+  #set -x
   if [ "root" = "$USER" ];
   then
     export PROMPT="%B%F${fg_red}%m%k ${RED}$(__git_ps1 '[%s]')${fg_blue} %# %b%f%k"
   else
     export PROMPT="%B%F${prompt_color}%n@%m%k%B%F ${RED}$(__git_ps1 '[%s]') ${fg_blue} %# %b%f%k"
   fi
+  #set +x
 
   xrp="$(extended_rprompt 2> /dev/null)"
   if [ 0 -eq $? ];
   then
     export RPROMPT="%F${fg_green}%~${xrp}%f"
   fi
-
 }
 
 DIST=`cat /etc/os-release | grep NAME | grep -Eo "Arch|Gentoo" | head -1`
@@ -94,4 +95,5 @@ fi
 
 #cat /etc/os-release | grep NAME | cut -d'"' -f 2
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+curl https://istheinternetonfire.com/status.txt
 
