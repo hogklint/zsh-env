@@ -16,7 +16,7 @@ lastupdate()
   then
     critial="\033[01;31m"
   fi
-  echo "`hostname`: Last update $date $critial($days days ago)"
+  echo "`hostname`: Last update $date $critial($days days ago)\033[0m"
 }
 
 lastupdate
