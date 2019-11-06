@@ -125,5 +125,8 @@ fi
 
 #cat /etc/os-release | grep NAME | cut -d'"' -f 2
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-curl https://istheinternetonfire.com/status.txt
+if [ $(date "+%H") -lt 9 ]
+then
+    curl https://istheinternetonfire.com/status.txt
+fi
 
