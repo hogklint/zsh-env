@@ -61,7 +61,7 @@ extended_rprompt()
       set -x
       source $HOME/.${CURRENTPROJ}_params
       set +x
-      echo " ${BLUE}[${RED}$CURRENTPROJ${BLUE} / ${RED}$USED_DISPLAY_DEVICE${BLUE}]${NORM}"
+      echo " ${BLUE}[${RED}$CURRENTPROJ${BLUE}]${NORM}"
   fi
 }
 
