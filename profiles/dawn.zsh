@@ -126,6 +126,18 @@ function agseall
     ag --ignore prebuilts -sw "$@" $(fd -E boottime_tools -E mixins -E out --type d '^sepolicy$' "$AOSP_HOME/system" "$AOSP_HOME/device/acompany" "$AOSP_HOME/device/intel" "$AOSP_HOME/packages")
 }
 
+function j() {
+    if [[ "$#" -ne 0 ]]; then
+        cd $(autojump $@)
+        return
+    fi
+    cd "$(autojump -s | \
+        sort -k1gr | \
+        awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' | \
+        ag -v $(if [ $CURRENTPROJ != ASDF4 ]; then echo "/home/jimmieh/asdf4"; elif [ $CURRENTPROJ != ASDF2 ]; then echo "/home/jimmieh/asdf2"; fi) | \
+        fzf --height 40% --reverse --inline-info)"
+}
+
 ##################
 # End Functions
 ##################
@@ -176,7 +188,6 @@ alias rb='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] 
 alias sd='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl poweroff'
 alias stopflicker='xrandr --output DP-1-2-1-8 --off && setmonitor.sh'
 alias update_adb='cp ~/$AOSP_HOME/out/host/linux-x86/bin/{adb,fastboot,mke2fs} ~/local/android'
-
 
 if [[ -z "$DISPLAY" && $(tty) == /dev/tty1 ]]
 then
