@@ -83,7 +83,7 @@ get_git()
     if [ $# -ne 1 ]
     then
         echo "get_git <repo name>" 2>/dev/null
-        exit 1
+        return 1
     fi
 
     git clone ssh://gerrit/$1 && scp -p gerrit:hooks/commit-msg $1/.git/hooks/
@@ -142,7 +142,7 @@ alias vcm_serial='picocom -b 115200 /dev/ttyUSB'
 
 # navigation
 alias h='cd $AOSP_HOME'
-alias d='cd $AOSP_HOME/device/ccompany/volvoasdf4'
+alias d='cd $AOSP_HOME/device/acompany/asdf4_common'
 alias a='cd $AOSP_HOME/device/acompany'
 alias c='cd $AOSP_HOME/vendor/acompany/components'
 alias p='cd $PRODUCT_HOME'
@@ -170,11 +170,11 @@ alias rmout='run_remote rm -rf out'
 alias core='ssh core-build-01'
 alias aga='ag --ignore out --ignore cts --ignore tests'
 alias agse='ag --ignore prebuilts'
-alias agmb='ag -G "\.bp$|\.mk$"'
+alias agmb='ag -G "\.bp$|\.mk$" --ignore out'
 
 alias rb='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl reboot'
 alias sd='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl poweroff'
-alias stopflicker='xrandr --output DP1-2-1-8 --off && setmonitor.sh'
+alias stopflicker='xrandr --output DP-1-2-1-8 --off && setmonitor.sh'
 alias update_adb='cp ~/$AOSP_HOME/out/host/linux-x86/bin/{adb,fastboot,mke2fs} ~/local/android'
 
 
