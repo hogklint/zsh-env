@@ -1,4 +1,5 @@
 ##!/bin/zsh
+
 source $HOME/.zsh/colors
 
 alias ls='ls --color=auto'
@@ -9,6 +10,7 @@ alias la='ls -hla --color=auto'
 alias gs='git status'
 alias gd='git diff'
 alias gg='git grep -W'
+alias cal='cal -m'
 
 bindkey -e
 bindkey "^W" "vi-backward-kill-word"
