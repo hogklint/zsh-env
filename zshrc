@@ -83,6 +83,29 @@ function precmd()
   fi
 }
 
+function j() {
+    if [[ "$#" -ne 0 ]]; then
+        cd $(autojump $@)
+        return
+    fi
+    cd "$(autojump -s | \
+        sort -k1gr | \
+        awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' | \
+        fzf --height 40% --reverse --inline-info)"
+}
+
+function run_j()
+{
+    if [ -z "$BUFFER" ]
+    then
+        BUFFER="j"
+        zle accept-line
+    fi
+}
+
+zle -N run_j
+bindkey "^ " run_j
+
 DIST=`cat /etc/os-release | grep NAME | grep -Eo "Arch|Gentoo" | head -1`
 if [[ -f "$HOME/.zsh/profiles/$DIST.zsh" ]]
 then
