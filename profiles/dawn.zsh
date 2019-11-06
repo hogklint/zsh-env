@@ -2,7 +2,7 @@ export prompt_color="$fg_brown"
 export TERM=dtterm
 
 export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
-export FZF_DEFAULT_COMMAND='ag -g "" --ignore "*Test.[ch]pp" --ignore "*\.$"'
+export FZF_DEFAULT_COMMAND='fd ---type f -E out --no-ignore-vcs -E "*Test.[ch]pp"'
 
 export USE_CCACHE="Y"
 
