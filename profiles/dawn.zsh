@@ -111,12 +111,13 @@ function sme()
 function pushsel()
 {
     local readonly selinux_dir="$AOSP_HOME/out/target/product/$PROJ_DEVICE/vendor/etc/selinux"
-    [ -d $selinux_dir ] || { echo "error: Directory not found $selinux_dir"; exit 1 }
+    [ -d $selinux_dir ] || { echo "error: Directory not found $selinux_dir"; return 1 }
     b :
     adb root
     b :
     adb remount
     adb push $AOSP_HOME/out/target/product/$PROJ_DEVICE/vendor/etc/selinux /vendor/etc
+    adb push $AOSP_HOME/out/target/product/$PROJ_DEVICE/system/etc/selinux /system/etc
     adb reboot
 }
 
