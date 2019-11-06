@@ -123,7 +123,7 @@ function pushsel()
 
 function agseall
 {
-    ag --ignore prebuilts "$@" $AOSP_HOME/system/sepolicy $AOSP_HOME/device/intel/sepolicy $PRODUCT_HOME/**/sepolicy
+    ag --ignore prebuilts -sw "$@" $(fd -E boottime_tools -E mixins -E out --type d '^sepolicy$' "$AOSP_HOME/system" "$AOSP_HOME/device/acompany" "$AOSP_HOME/device/intel" "$AOSP_HOME/packages")
 }
 
 ##################
