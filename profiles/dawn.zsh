@@ -1,6 +1,7 @@
 export prompt_color="$fg_brown"
 export TERM=dtterm
 
+export FZF_CTRL_R_OPTS="--reverse"
 export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
 export FZF_DEFAULT_COMMAND='fd ---type f -E out --no-ignore-vcs -E "*Test.[ch]pp"'
 
@@ -126,7 +127,8 @@ function agseall
     ag --ignore prebuilts -sw "$@" $(fd -E boottime_tools -E mixins -E out --type d '^sepolicy$' "$AOSP_HOME/system" "$AOSP_HOME/device/acompany" "$AOSP_HOME/device/intel" "$AOSP_HOME/packages")
 }
 
-function j() {
+function j()
+{
     if [[ "$#" -ne 0 ]]; then
         cd $(autojump $@)
         return
@@ -137,6 +139,7 @@ function j() {
         ag -v $(if [ $CURRENTPROJ != ASDF4 ]; then echo "/home/jimmieh/asdf4"; elif [ $CURRENTPROJ != ASDF2 ]; then echo "/home/jimmieh/asdf2"; fi) | \
         fzf --height 40% --reverse --inline-info)"
 }
+
 
 ##################
 # End Functions
@@ -154,9 +157,6 @@ alias vcm_serial='picocom -b 115200 /dev/ttyUSB'
 
 # navigation
 alias h='cd $AOSP_HOME'
-alias d='cd $AOSP_HOME/device/acompany/asdf4_common'
-alias a='cd $AOSP_HOME/device/acompany'
-alias c='cd $AOSP_HOME/vendor/acompany/components'
 alias p='cd $PRODUCT_HOME'
 alias mani='cd $AOSP_HOME/.repo/manifests'
 alias se='cd $AOSP_HOME/system/sepolicy'
