@@ -38,6 +38,24 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt hist_expire_dups_first
 
+function precmd()
+{
+  #set -x
+  if [ "root" = "$USER" ];
+  then
+    export PROMPT="%B%F${fg_red}%m%k ${fg_blue} %# %b%f%k"
+  else
+    export PROMPT="%B%F${prompt_color}%n@%m%k%B%F ${RED}$(__git_ps1 '[%s]') ${fg_blue} %# %b%f%k"
+  fi
+  #set +x
+
+  xrp="$(extended_rprompt 2> /dev/null)"
+  if [ 0 -eq $? ];
+  then
+    export RPROMPT="%F${fg_green}%~${xrp}%f"
+  fi
+}
+
 if [ -d "$HOME/local/bin" ];
 then
   export PATH="$HOME/local/bin:$PATH"
@@ -48,6 +66,8 @@ then
 fi
 
 export RPROMPT="%F${fg_green}%~%f"
+
+[ "root" = "$USER" ] && return
 
 # Git
 source $HOME/.zsh/completion/git
@@ -64,24 +84,6 @@ GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_DESCRIBE_STYLE=contains
 GIT_PS1_SHOWCOLORHINTS=true
-
-function precmd()
-{
-  #set -x
-  if [ "root" = "$USER" ];
-  then
-    export PROMPT="%B%F${fg_red}%m%k ${RED}$(__git_ps1 '[%s]')${fg_blue} %# %b%f%k"
-  else
-    export PROMPT="%B%F${prompt_color}%n@%m%k%B%F ${RED}$(__git_ps1 '[%s]') ${fg_blue} %# %b%f%k"
-  fi
-  #set +x
-
-  xrp="$(extended_rprompt 2> /dev/null)"
-  if [ 0 -eq $? ];
-  then
-    export RPROMPT="%F${fg_green}%~${xrp}%f"
-  fi
-}
 
 function j() {
     if [[ "$#" -ne 0 ]]; then
