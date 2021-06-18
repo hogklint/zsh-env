@@ -90,14 +90,15 @@ get_git()
     git clone ssh://gerrit/$1 && scp -p gerrit:hooks/commit-msg $1/.git/hooks/
 }
 
-function run_adb_shell()
+function choose_paths()
 {
-    BUFFER="adb shell $BUFFER"
-    zle accept-line
+    my_files="$(tmux capture-pane -Jp | pe | nauniq | fzf -m --height 20% --reverse | paste -s -)"
+    BUFFER="$BUFFER $my_files"
+    zle reset-prompt
 }
 
-zle -N run_adb_shell
-bindkey "^K" run_adb_shell
+zle -N choose_paths
+bindkey "^K" choose_paths
 
 function sme()
 {
