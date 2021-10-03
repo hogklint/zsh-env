@@ -1,6 +1,8 @@
 export prompt_color="$fg_brown"
 export TERM=dtterm
 
+setopt interactive_comments
+
 export FZF_CTRL_R_OPTS="--reverse"
 export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
 export FZF_DEFAULT_COMMAND='fd ---type f -E out --no-ignore-vcs -E "*Test.[ch]pp"'
