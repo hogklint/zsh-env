@@ -152,6 +152,38 @@ function j()
         fzf --height 40% --reverse --inline-info)"
 }
 
+function junos()
+{
+    if [ "$#" -ne 2 ]
+    then
+        echo "Usage: junos <emea/asia/amer/china> <DSID>"
+        return 1
+    fi
+    sudo openconnect --juniper -C "DSID=$2" access.$1.acompany.com/sslvpn --no-proxy
+    #sudo openconnect --juniper -C "DSID=$1" access.$2.acompany.com/sslvpn --no-proxy -s 'vpn-slice 10.0.0.0/8'
+}
+
+function wait_for_boot_completed()
+{
+    while [ "$(adb shell getprop sys.boot_completed 2>/dev/null)" != 1 ]
+    do
+        sleep 1
+    done
+}
+
+function sus()
+{
+    killall -s SIGTERM chromium
+    while true;
+    do
+        echo "Suspend $(date)"
+        SECONDS=0
+        sudo systemctl suspend
+        sleep 15
+        echo "$SECONDS seconds passed"
+        [ $SECONDS -gt 90 ] && break
+    done
+}
 
 ##################
 # End Functions
