@@ -33,6 +33,10 @@ if [ -d "$HOME/local/android" ];
 then
   export PATH="$HOME/local/android:$PATH"
 fi
+if [ -d "$HOME/repos/gap_scripts/bin" ];
+then
+  export PATH="$HOME/repos/gap_scripts/bin:$PATH"
+fi
 
 # autocompletion colors
 eval `dircolors -b`
@@ -44,6 +48,9 @@ tmuxsession="$(tmux list-panes -F "#S")"
 if [[ $tmuxsession == asdf4* ]]
 then
   export CURRENTPROJ="ASDF4"
+elif [[ $tmuxsession == asdf2qc* ]]
+then
+  export CURRENTPROJ="ASDF225"
 elif [[ $tmuxsession == asdf2* ]]
 then
   export CURRENTPROJ="ASDF2"
@@ -121,13 +128,15 @@ function pushsel()
     b :
     adb remount
     adb push $AOSP_HOME/out/target/product/$PROJ_DEVICE/vendor/etc/selinux /vendor/etc
+    adb push $AOSP_HOME/out/target/product/$PROJ_DEVICE/vendor/odm/etc/selinux /vendor/odm/etc
     adb push $AOSP_HOME/out/target/product/$PROJ_DEVICE/system/etc/selinux /system/etc
+    adb push $AOSP_HOME/out/target/product/$PROJ_DEVICE/product/etc/selinux /product/etc
     adb reboot
 }
 
 function agseall
 {
-    ag --ignore prebuilts -sw "$@" $(fd -E boottime_tools -E mixins -E out --type d '^sepolicy$' "$AOSP_HOME/system" "$AOSP_HOME/device/acompany" "$AOSP_HOME/device/intel" "$AOSP_HOME/packages")
+    ag --ignore prebuilts "$@" $(fd -E boottime_tools -E mixins -E out --type d '^sepolicy$' "$AOSP_HOME/system" "$AOSP_HOME/device/acompany" "$AOSP_HOME/device/intel" "$AOSP_HOME/packages")
 }
 
 function j()
@@ -160,16 +169,17 @@ alias vcm_serial='picocom -b 115200 /dev/ttyUSB'
 
 # navigation
 alias h='cd $AOSP_HOME'
-alias p='cd $PRODUCT_HOME'
-alias mani='cd $AOSP_HOME/.repo/manifests'
+alias r='cd $REPO_HOME'
 alias se='cd $AOSP_HOME/system/sepolicy'
-alias vm='vim $AOSP_HOME/.repo/manifest.xml'
+alias m='cd $REPO_HOME/.repo/manifests'
 
 # tmux alias
 alias asdf41='tmuxifier load-session asdf41'
 alias asdf42='tmuxifier load-session asdf42'
 alias asdf21='tmuxifier load-session asdf21'
 alias asdf22='tmuxifier load-session asdf22'
+alias asdf2qc1='tmuxifier load-session asdf2qc1'
+alias asdf2qc2='tmuxifier load-session asdf2qc2'
 
 # Build AOSP
 alias rr='run_remote'
@@ -183,14 +193,20 @@ alias hmm='run_remote hmm'
 
 alias rmout='run_remote rm -rf out'
 alias core='ssh core-build-01'
-alias aga='ag --ignore out --ignore cts --ignore tests'
+alias agai='ag --ignore out --ignore cts --ignore tests'
 alias agse='ag --ignore prebuilts'
 alias agmb='ag -G "\.bp$|\.mk$" --ignore out'
+alias aga='ag --ignore out'
+alias ags='ag --skip-vcs-ignores --ignore out'
+
+alias fds='fd -E out --no-ignore-vcs --hidden'
 
 alias rb='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl reboot'
 alias sd='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl poweroff'
-alias stopflicker='xrandr --output DP-1-2-1-8 --off && setmonitor.sh'
+alias stopflicker='xrandr --output DP-1-1-1-8 --off && setmonitor.sh'
 alias update_adb='cp ~/$AOSP_HOME/out/host/linux-x86/bin/{adb,fastboot,mke2fs} ~/local/android'
+
+alias pe='path-extractor'
 
 if [[ -z "$DISPLAY" && $(tty) == /dev/tty1 ]]
 then
