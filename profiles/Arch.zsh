@@ -7,7 +7,7 @@ alias chrome='chromium'
 
 lastupdate()
 {
-  local readonly date="`grep "starting full system upgrade" /var/log/pacman.log | tail -1 | grep -Eo '[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}'`"
+  local readonly date="`grep "starting full system upgrade" /var/log/pacman.log | tail -1 | grep -Eo '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}'`"
   let thenn=`date +%s -d $date`
   let now=`date +%s -d now`
   let DIFF=$(($now - $thenn))
