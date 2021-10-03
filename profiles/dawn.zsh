@@ -183,12 +183,11 @@ alias asdf2qc2='tmuxifier load-session asdf2qc2'
 
 # Build AOSP
 alias rr='run_remote'
-alias m='run_remote m'
-alias mm='run_remote mm'
-alias mma='run_remote mma'
-alias mmm='run_remote mmm'
-alias mmma='run_remote mmma'
-alias hmm='run_remote hmm'
+#alias mm='run_remote mm'
+#alias mma='run_remote mma'
+#alias mmm='run_remote mmm'
+#alias mmma='run_remote mmma'
+#alias hmm='run_remote hmm'
 #alias repo='run_remote repo'
 
 alias rmout='run_remote rm -rf out'
