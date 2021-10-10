@@ -12,6 +12,7 @@ alias gd='git diff'
 alias gg='git grep -W'
 alias cal='cal -m'
 alias hi='ag --passthrough'
+alias pe='path-extractor'
 
 bindkey -e
 bindkey "^W" "vi-backward-kill-word"
@@ -38,6 +39,7 @@ setopt hist_ignore_space
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt hist_expire_dups_first
+setopt interactive_comments
 
 function precmd()
 {

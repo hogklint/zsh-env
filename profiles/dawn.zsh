@@ -1,8 +1,6 @@
 export prompt_color="$fg_brown"
 export TERM=dtterm
 
-setopt interactive_comments
-
 export USE_CCACHE="Y"
 
 PATH="/home/jimmieh/perl5/bin${PATH:+:${PATH}}"; export PATH;
@@ -203,8 +201,6 @@ alias rb='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] 
 alias sd='pkill -SIGTERM chromium; sleep 1; { [ ! $(command -v shutdown_win7) ] || shutdown_win7 } && systemctl poweroff'
 alias stopflicker='xrandr --output DP-1-1-1-8 --off && setmonitor.sh'
 alias update_adb='cp ~/$AOSP_HOME/out/host/linux-x86/bin/{adb,fastboot,mke2fs} ~/local/android'
-
-alias pe='path-extractor'
 
 if [[ -z "$DISPLAY" && $(tty) == /dev/tty1 ]]
 then
