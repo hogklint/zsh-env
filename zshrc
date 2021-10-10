@@ -11,6 +11,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gg='git grep -W'
 alias cal='cal -m'
+alias hi='ag --passthrough'
 
 bindkey -e
 bindkey "^W" "vi-backward-kill-word"
