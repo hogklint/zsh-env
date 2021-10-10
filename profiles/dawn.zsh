@@ -19,12 +19,6 @@ then
   alias tl='tmuxifier load-window'
 fi
 
-#if [ -d "$HOME/local/dltviewer/usr" ];
-#then
-#  export PATH="$PATH:$HOME/local/dltviewer/usr/bin"
-#  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/dltviewer/usr/lib
-#fi
-
 if [ -d "$HOME/local/android" ];
 then
   export PATH="$HOME/local/android:$PATH"
