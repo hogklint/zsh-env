@@ -3,10 +3,6 @@ export TERM=dtterm
 
 setopt interactive_comments
 
-export FZF_CTRL_R_OPTS="--reverse"
-export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
-export FZF_DEFAULT_COMMAND='fd ---type f -E out --no-ignore-vcs -E "*Test.[ch]pp"'
-
 export USE_CCACHE="Y"
 
 PATH="/home/jimmieh/perl5/bin${PATH:+:${PATH}}"; export PATH;
@@ -98,16 +94,6 @@ get_git()
 
     git clone ssh://gerrit/$1 && scp -p gerrit:hooks/commit-msg $1/.git/hooks/
 }
-
-function choose_paths()
-{
-    my_files="$(tmux capture-pane -Jp | pe | nauniq | fzf -m --height 20% --reverse | paste -s -)"
-    BUFFER="$BUFFER $my_files"
-    zle reset-prompt
-}
-
-zle -N choose_paths
-bindkey "^K" choose_paths
 
 function sme()
 {

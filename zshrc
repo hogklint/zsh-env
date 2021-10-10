@@ -57,6 +57,7 @@ function precmd()
   fi
 }
 
+
 if [ -d "$HOME/local/bin" ];
 then
   export PATH="$HOME/local/bin:$PATH"
@@ -92,6 +93,15 @@ GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_DESCRIBE_STYLE=contains
 GIT_PS1_SHOWCOLORHINTS=true
 
+
+############################
+# FZF settings and functions
+#
+
+export FZF_CTRL_R_OPTS="--reverse"
+export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
+export FZF_DEFAULT_COMMAND='fd ---type f -E out --no-ignore-vcs -E "*Test.[ch]pp"'
+
 function j() {
     if [[ "$#" -ne 0 ]]; then
         cd $(autojump $@)
@@ -111,7 +121,6 @@ function run_j()
         zle accept-line
     fi
 }
-
 zle -N run_j
 bindkey "^ " run_j
 
@@ -128,6 +137,20 @@ function fif() {
   fi
 }
 
+function choose_paths()
+{
+    my_files="$(tmux capture-pane -Jp | pe | nauniq | fzf -m --height 20% --reverse | paste -s -)"
+    BUFFER="$BUFFER $my_files"
+    zle reset-prompt
+}
+zle -N choose_paths
+bindkey "^K" choose_paths
+
+
+#################
+# Import profiles
+#
+
 DIST=`cat /etc/os-release | grep NAME | grep -Eo "Arch|Gentoo" | head -1`
 if [[ -f "$HOME/.zsh/profiles/$DIST.zsh" ]]
 then
@@ -140,7 +163,11 @@ then
   source $HOME/.zsh/profiles/$HOST.zsh 2> /dev/null
 fi
 
-#cat /etc/os-release | grep NAME | cut -d'"' -f 2
+
+########################
+# Print internet on fire
+#
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if [ $(date "+%H") -lt 9 ]
 then
