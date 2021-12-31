@@ -44,6 +44,14 @@ setopt hist_find_no_dups
 setopt hist_expire_dups_first
 setopt interactive_comments
 
+extended_rprompt()
+{
+  if [ -n "$VIRTUAL_ENV" ]
+  then
+    echo " ${BLUE}[${RED}$(basename $VIRTUAL_ENV)${BLUE}]${NORM}"
+  fi
+}
+
 function precmd()
 {
   #set -x
