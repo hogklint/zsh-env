@@ -1,7 +1,7 @@
 export prompt_color="$fg_brown"
 export TERM=dtterm
 
-source ~/.dk_variables
+source ~/.kd_variables
 
 # make sh
 export ITFLAG=-it
