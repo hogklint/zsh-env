@@ -34,13 +34,13 @@ function pullpr()
 {
   for pr in "$@"
   do
-    if git rev-parse --verify "pr$pr"
-    then
-      git checkout master
-      git branch -D "pr$pr"
-    fi
-    git fetch origin "pull/$pr/head:pr$pr"
-    git checkout "pr$pr"
+    i=0
+    while git rev-parse --verify "pr$pr-$i"
+    do
+      i=$((i+1))
+    done
+    git fetch origin "pull/$pr/head:pr$pr-$i"
+    git checkout "pr$pr-$i"
   done
 }
 
