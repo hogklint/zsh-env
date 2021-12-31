@@ -1,8 +1,8 @@
 alias reboot='echo "reboot eh?"'
 alias shutdown='echo "shutdown eh?"'
-alias rb='pkill -SIGTERM chromium; systemctl reboot'
+alias rb='pkill -SIGTERM chromium; sleep 1; systemctl reboot'
 alias sd='pkill -SIGTERM chromium; systemctl poweroff'
-alias suspend='systemctl suspend'
+alias suspend='slock &; systemctl suspend'
 alias chrome='chromium'
 
 lastupdate()
