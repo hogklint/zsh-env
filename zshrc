@@ -73,6 +73,12 @@ then
   export PATH="$HOME/.local/bin:$PATH"
 fi
 
+export GOPATH=$HOME/local/go
+if [ -d "$GOPATH/bin" ];
+then
+  export PATH="$GOPATH/bin:$PATH"
+fi
+
 if [ -d "$HOME/local/lib" ];
 then
   export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
