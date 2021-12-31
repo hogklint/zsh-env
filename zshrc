@@ -32,6 +32,8 @@ export HISTSIZE=2000000
 export SAVEHIST=2000000
 export HISTFILE=~/.zhistory
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 setopt cshjunkiequotes #command must match qoutes
 setopt noclobber # redirect to existing file with >!
 setopt extended_history
