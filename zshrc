@@ -9,6 +9,7 @@ alias l='ls -hl --color=auto'
 alias la='ls -hla --color=auto'
 alias gs='git status'
 alias gd='git diff'
+alias gdc='git diff --cached'
 alias gg='git grep -W'
 alias cal='cal -m'
 alias hi='ag --passthrough'
@@ -189,4 +190,3 @@ if [ $(date "+%H") -lt 9 ]
 then
     curl https://istheinternetonfire.com/status.txt
 fi
-
