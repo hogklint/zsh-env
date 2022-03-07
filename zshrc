@@ -134,7 +134,7 @@ GIT_PS1_SHOWCOLORHINTS=true
 
 export FZF_CTRL_R_OPTS="--reverse"
 export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
-export FZF_DEFAULT_COMMAND='fd ---type f -E out --no-ignore-vcs -E "*Test.[ch]pp"'
+export FZF_DEFAULT_COMMAND='fd --type f -E out --no-ignore-vcs -E "*Test.[ch]pp"'
 
 function j() {
     if [[ "$#" -ne 0 ]]; then
