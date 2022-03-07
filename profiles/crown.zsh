@@ -49,6 +49,12 @@ function pullpr()
   done
 }
 
+function jenklog()
+{
+  url=${1/%consoleText//}
+  curl -u $(pass kd/jenkins) "$url/consoleText" | vim -
+}
+
 # Start X
 if [[ -z "$DISPLAY" && $(tty) == /dev/tty1 ]]
 then
