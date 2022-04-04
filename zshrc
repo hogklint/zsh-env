@@ -185,6 +185,21 @@ function choose_paths()
 zle -N choose_paths
 bindkey "^K" choose_paths
 
+function a()
+{
+  if [ -n "$MY_VENVS["$1"]" ]
+  then
+    TMP_VENV_PATH=$MY_VENVS["$1"]
+  elif [ -d "$HOME/tmp/venvs/$1" ]
+  then
+    TMP_VENV_PATH=$HOME/tmp/venvs/$1
+  else
+    TMP_VENV_PATH=$1
+  fi
+
+  source "$TMP_VENV_PATH/bin/activate"
+}
+
 
 #################
 # Import profiles

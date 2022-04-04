@@ -13,6 +13,9 @@ export GPG_TTY=$(tty)
 # pass shift-insert clipboard
 export PASSWORD_STORE_X_SELECTION=primary
 
+declare -A MY_VENVS
+MY_VENVS["cli"]=$HOME/tmp/dk_cli/dk-venv
+
 if [ -d "$HOME/local/kd" ];
 then
   export PATH="$HOME/local/kd:$PATH"
