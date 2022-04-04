@@ -88,6 +88,11 @@ then
   export PATH="$GOPATH/bin:$PATH"
 fi
 
+if [ -d "$HOME/.krew/bin" ];
+then
+  export PATH="$HOME/.krew/bin:$PATH"
+fi
+
 if [ -d "$HOME/local/lib" ];
 then
   export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
