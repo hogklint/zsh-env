@@ -32,14 +32,32 @@ alias kc='kubectl'
 
 function pullpr()
 {
+  remote_url=$(git config --get remote.origin.url)
+  if [[ $remote_url =~ "ghe.datakitchen.io|github.com" ]]
+  then
+    pull_prefix="pull"
+  elif [[ $remote_url =~ "gitlab.com" ]]
+  then
+    pull_prefix="merge-requests"
+  else
+    echo "error: could not determine git provider (github/gitlab)"
+    return
+  fi
+
   for pr in "$@"
   do
     i=0
+    git fetch origin "$pull_prefix/$pr/head"
     while git rev-parse --verify "pr$pr-$i"
     do
+      if [[ "$(git log -1 --format=%H FETCH_HEAD)" == "$(git log -1 --format=%H "pr$pr-$i")" ]]
+      then
+        git checkout "pr$pr-$i"
+        return
+      fi
       i=$((i+1))
     done
-    git fetch origin "pull/$pr/head:pr$pr-$i"
+    git fetch origin "$pull_prefix/$pr/head:pr$pr-$i"
     git checkout "pr$pr-$i"
   done
 }
