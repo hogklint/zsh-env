@@ -37,6 +37,8 @@ alias vo='vim ~/repos/orgmode/main.org'
 alias p="cd $PLATFORM_HOME"
 alias aga='ag --ignore tests'
 alias kc='kubectl'
+alias ch='rm -rf build dist heimdall_be.egg-info Heimdall_BE.egg-info instance collaborate_swagger_spec.yaml index.txt test.db'
+alias fds='fd --no-ignore-vcs --hidden'
 
 function pullpr()
 {
