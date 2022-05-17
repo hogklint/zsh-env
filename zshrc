@@ -187,7 +187,10 @@ bindkey "^K" choose_paths
 
 function a()
 {
-  if [ -n "$MY_VENVS["$1"]" ]
+  if [ 0 -eq "$#" ]
+  then
+    TMP_VENV_PATH=".venv"
+  elif [ -n "$MY_VENVS["$1"]" ]
   then
     TMP_VENV_PATH=$MY_VENVS["$1"]
   elif [ -d "$HOME/tmp/venvs/$1" ]
