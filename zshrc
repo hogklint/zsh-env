@@ -15,6 +15,7 @@ alias cal='cal -m'
 alias hi='ag --passthrough'
 alias pe='path-extractor'
 alias ssh='ssh -o AddKeysToAgent=yes'
+alias fds='fd --no-ignore-vcs --hidden'
 
 bindkey -e
 bindkey "^W" "vi-backward-kill-word"
