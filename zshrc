@@ -99,6 +99,11 @@ then
   export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
 fi
 
+if command -v kubectl &>/dev/null;
+then
+  alias kc='kubectl'
+fi
+
 export RPROMPT="%F${fg_green}%~%f"
 
 [ "root" = "$USER" ] && return
