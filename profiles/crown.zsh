@@ -28,6 +28,14 @@ PERL_LOCAL_LIB_ROOT="/home/jhogklint/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_L
 PERL_MB_OPT="--install_base \"/home/jhogklint/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/jhogklint/perl5"; export PERL_MM_OPT;
 
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh
+
+# invoke autocomplete
+pushd "$HEIMDALL_HOME" > /dev/null
+source <(invoke --print-completion-script=zsh)
+popd > /dev/null
 
 #######
 # Alias/Functions
@@ -75,6 +83,12 @@ function jenklog()
 {
   url=${1/%consoleText//}
   curl -u $(pass kd/jenkins) "$url/consoleText" | vim -
+}
+
+function fu()
+{
+  [ $# -ne 1 ] && { echo "fu <uuid>"; return }
+  python -c 'import sys; from uuid import UUID; u=UUID(sys.argv[1]); print(u)' "$1"
 }
 
 # Start X

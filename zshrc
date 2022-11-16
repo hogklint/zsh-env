@@ -36,7 +36,7 @@ export HISTFILE=~/.zhistory
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-setopt cshjunkiequotes #command must match qoutes
+#setopt cshjunkiequotes #command must match qoutes
 setopt noclobber # redirect to existing file with >!
 setopt extended_history
 setopt inc_append_history
