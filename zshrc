@@ -48,9 +48,17 @@ setopt interactive_comments
 
 extended_rprompt()
 {
+  PARTS=()
   if [ -n "$VIRTUAL_ENV" ]
   then
-    echo " ${BLUE}[${RED}$(basename $VIRTUAL_ENV)${BLUE}]${NORM}"
+    PARTS+=("${RED}$(basename $VIRTUAL_ENV)")
+  fi
+  if [ -n "$KUBECONFIG" ]
+  then
+    PARTS+=("${RED}$(echo -ne '\u2388')")
+  fi
+  if [ "${#PARTS[@]}" -gt 0 ]; then
+    echo " ${BLUE}[${RED}${PARTS[@]}${BLUE}]${NORM}"
   fi
 }
 
