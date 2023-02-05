@@ -53,10 +53,6 @@ extended_rprompt()
   then
     PARTS+=("${RED}$(basename $VIRTUAL_ENV)")
   fi
-  if [ -n "$KUBECONFIG" ]
-  then
-    PARTS+=("${RED}$(echo -ne '\u2388')")
-  fi
   if [ "${#PARTS[@]}" -gt 0 ]; then
     echo " ${BLUE}[${RED}${PARTS[@]}${BLUE}]${NORM}"
   fi
@@ -73,7 +69,7 @@ function precmd()
   fi
   #set +x
 }
-RPROMPT='%F${fg_green}%~$(extended_rprompt)%f'
+RPROMPT='%F${fg_green}%~$(extended_rprompt)$(kube_ps1)%f'
 
 
 if [ -d "$HOME/local/bin" ];
@@ -260,3 +256,4 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
+zinit light jonmosco/kube-ps1
