@@ -72,13 +72,8 @@ function precmd()
     export PROMPT="%B%F${prompt_color}%n@%m%k%B%F ${RED}$(__git_ps1 '[%s]') ${fg_blue} %# %b%f%k"
   fi
   #set +x
-
-  xrp="$(extended_rprompt 2> /dev/null)"
-  if [ 0 -eq $? ];
-  then
-    export RPROMPT="%F${fg_green}%~${xrp}%f"
-  fi
 }
+RPROMPT='%F${fg_green}%~$(extended_rprompt)%f'
 
 
 if [ -d "$HOME/local/bin" ];
@@ -111,8 +106,6 @@ if command -v kubectl &>/dev/null;
 then
   alias kc='kubectl'
 fi
-
-export RPROMPT="%F${fg_green}%~%f"
 
 [ "root" = "$USER" ] && return
 
