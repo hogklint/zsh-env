@@ -47,6 +47,11 @@ alias pp="cd $PLATFORM_HOME"
 alias aga='ag --ignore tests'
 alias ch='rm -rf build dist heimdall_be.egg-info Heimdall_BE.egg-info instance collaborate_swagger_spec.yaml index.txt test.db'
 
+function st()
+{
+  stern --template='{{color .PodColor (printf "%.*s" 25 .PodName)}}/{{color .ContainerColor (printf "%.*s" 9 .ContainerName)}} {{with $d := .Message | tryParseJSON}}[{{levelColor $d.levelname}}] {{$d.message}}{{if $d.traceback}}{{"\n"}}{{$d.traceback}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}' "$@"
+}
+
 function pullpr()
 {
   remote_url=$(git config --get remote.origin.url)
