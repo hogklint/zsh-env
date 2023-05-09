@@ -34,7 +34,7 @@ source /usr/bin/virtualenvwrapper.sh
 
 # invoke autocomplete
 pushd "$HEIMDALL_HOME" > /dev/null
-source <(invoke --print-completion-script=zsh)
+source <(.venv/bin/invoke --print-completion-script=zsh)
 popd > /dev/null
 
 #######
