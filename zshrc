@@ -69,7 +69,7 @@ function precmd()
   fi
   #set +x
 }
-RPROMPT='%F${fg_green}%~$(extended_rprompt)$(kube_ps1)%f'
+RPROMPT='%F${fg_green}%~$(extended_rprompt) $(kube_ps1)%f'
 
 
 if [ -d "$HOME/local/bin" ];
