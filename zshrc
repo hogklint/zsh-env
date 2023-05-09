@@ -179,15 +179,6 @@ function fif() {
   fi
 }
 
-function choose_paths()
-{
-    my_files="$(tmux capture-pane -Jp | pe | nauniq | fzf -m --height 20% --reverse | paste -s -)"
-    BUFFER="$BUFFER $my_files"
-    zle reset-prompt
-}
-zle -N choose_paths
-bindkey "^K" choose_paths
-
 function a()
 {
   if [ 0 -eq "$#" ]
