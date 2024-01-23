@@ -1,4 +1,4 @@
-nomme-zsh-env
+zsh-env
 =============
 
 My zsh environment
