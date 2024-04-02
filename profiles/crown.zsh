@@ -47,7 +47,7 @@ alias ch='rm -rf build dist heimdall_be.egg-info Heimdall_BE.egg-info instance c
 
 function st()
 {
-  stern --template='{{color .PodColor (printf "%.*s" 25 .PodName)}}/{{color .ContainerColor (printf "%.*s" 9 .ContainerName)}} {{with $d := .Message | tryParseJSON}}[{{levelColor $d.levelname}}] {{$d.message}}{{if $d.traceback}}{{"\n"}}{{$d.traceback}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}' "$@"
+  stern --template='{{color .ContainerColor .ContainerName}} {{with $d := .Message | tryParseJSON}}{{toRFC3339Nano $d.timestamp}} [{{levelColor $d.levelname}}] {{$d.message}}{{if $d.traceback}}{{"\n"}}{{$d.traceback}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}' "$@"
 }
 
 function pullpr()
