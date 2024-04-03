@@ -30,6 +30,7 @@ promptinit
 
 export EDITOR=vim
 export PAGER=less
+export LESS=-Xr
 export HISTSIZE=2000000
 export SAVEHIST=2000000
 export HISTFILE=~/.zhistory
