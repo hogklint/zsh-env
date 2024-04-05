@@ -14,11 +14,6 @@ export PASSWORD_STORE_X_SELECTION=primary
 declare -A MY_VENVS
 MY_VENVS["cli"]=$HOME/tmp/dk_cli/dk-venv
 
-if [ -d "$HOME/local/kd" ];
-then
-  export PATH="$HOME/local/kd:$PATH"
-fi
-
 # Perl (Sqitch)
 PATH="/home/jhogklint/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/jhogklint/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
