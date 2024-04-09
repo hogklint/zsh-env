@@ -72,27 +72,22 @@ function precmd()
 }
 RPROMPT='%F${fg_green}%~$(extended_rprompt) $(kube_ps1)%f'
 
-
-if [ -d "$HOME/local/bin" ];
-then
-  export PATH="$HOME/local/bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ];
-then
-  export PATH="$HOME/.local/bin:$PATH"
-fi
-
 export GOPATH=$HOME/local/go
-if [ -d "$GOPATH/bin" ];
-then
-  export PATH="$GOPATH/bin:$PATH"
-fi
-
-if [ -d "$HOME/.krew/bin" ];
-then
-  export PATH="$HOME/.krew/bin:$PATH"
-fi
+PATHS=(
+  "$HOME/local/bin"
+  "$HOME/.local/bin"
+  "$HOME/.krew/bin"
+  "$HOME/local/argocd"
+  "$GOPATH/bin"
+)
+for p in ${PATHS[@]};
+do
+  if [ -d "$p" ];
+  then
+    PATH="$p:$PATH"
+  fi
+done
+export PATH
 
 if [ -d "$HOME/local/lib" ];
 then
