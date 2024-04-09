@@ -94,6 +94,11 @@ then
   export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
 fi
 
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ];
+then
+  source $HOME/.nix-profile/etc/profile.d/nix.sh
+fi
+
 if command -v kubectl &>/dev/null;
 then
   alias kc='kubectl'
