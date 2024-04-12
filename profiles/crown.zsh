@@ -21,9 +21,8 @@ PERL_LOCAL_LIB_ROOT="/home/jhogklint/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_L
 PERL_MB_OPT="--install_base \"/home/jhogklint/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/jhogklint/perl5"; export PERL_MM_OPT;
 
-# virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
+#direnv
+source <(direnv hook zsh)
 
 # invoke autocomplete
 pushd "$HEIMDALL_HOME" > /dev/null
