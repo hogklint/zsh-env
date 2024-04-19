@@ -29,6 +29,10 @@ autoload -U promptinit
 promptinit
 
 export EDITOR=vim
+if command -v nvim
+then
+  export EDITOR=nvim
+fi
 export PAGER=less
 export LESS=-Xr
 export HISTSIZE=2000000
