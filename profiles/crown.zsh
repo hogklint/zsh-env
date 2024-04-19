@@ -4,10 +4,6 @@ export prompt_color="$fg_brown"
 # make sh
 export ITFLAG=-it
 
-# Make gpg-agent work with SSH keys
-export GPG_TTY=$(tty)
-#echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
-
 # pass shift-insert clipboard
 export PASSWORD_STORE_X_SELECTION=primary
 

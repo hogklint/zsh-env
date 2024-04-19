@@ -40,6 +40,7 @@ export SAVEHIST=2000000
 export HISTFILE=~/.zhistory
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export GPG_TTY=$(tty)
 
 #setopt cshjunkiequotes #command must match qoutes
 setopt noclobber # redirect to existing file with >!
