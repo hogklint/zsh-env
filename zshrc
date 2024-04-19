@@ -145,7 +145,7 @@ export FZF_CTRL_R_OPTS="--reverse"
 export FZF_DEFAULT_OPTS="--bind=ctrl-j:accept"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden -E "*Test.[ch]pp" -E ".git"'
 
-function j() {
+function k() {
     if [[ "$#" -ne 0 ]]; then
         cd $(autojump $@)
         return
@@ -156,16 +156,16 @@ function j() {
         fzf --height 40% --reverse --inline-info)"
 }
 
-function run_j()
+function run_k()
 {
     if [ -z "$BUFFER" ]
     then
-        BUFFER="j"
+        BUFFER="k"
         zle accept-line
     fi
 }
-zle -N run_j
-bindkey "^ " run_j
+zle -N run_k
+bindkey "^ " run_k
 
 function fif() {
   if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
