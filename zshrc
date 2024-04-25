@@ -29,7 +29,7 @@ autoload -U promptinit
 promptinit
 
 export EDITOR=vim
-if command -v nvim
+if command -v nvim &> /dev/null
 then
   export EDITOR=nvim
 fi
