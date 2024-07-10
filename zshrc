@@ -83,6 +83,7 @@ PATHS=(
   "$HOME/.local/bin"
   "$HOME/.krew/bin"
   "$HOME/local/argocd"
+  "$HOME/.config/yarn/global/node_modules/.bin"
   "$GOPATH/bin"
 )
 for p in ${PATHS[@]};
