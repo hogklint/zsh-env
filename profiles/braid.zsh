@@ -12,6 +12,9 @@ export PATH=$N_PREFIX/bin:$HOME/.pulumi/bin:$PATH
 # Disable corepack always setting packageManager field in package.json
 export COREPACK_ENABLE_AUTO_PIN=0
 
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
+
 source /usr/share/autojump/autojump.sh
 
 if command -v docker &> /dev/null
