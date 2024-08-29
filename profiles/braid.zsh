@@ -6,6 +6,12 @@ alias aga='ag --hidden'
 alias suspend='slock &; systemctl suspend'
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden -E "*Test.[ch]pp" -E ".git"'
 
+export N_PREFIX=$HOME/.cache/n
+export PATH=$N_PREFIX/bin:$HOME/.pulumi/bin:$PATH
+
+# Disable corepack always setting packageManager field in package.json
+export COREPACK_ENABLE_AUTO_PIN=0
+
 source /usr/share/autojump/autojump.sh
 
 if command -v docker &> /dev/null
