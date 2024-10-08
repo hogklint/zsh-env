@@ -35,6 +35,19 @@ function c()
   cl --template='{{color .ContainerColor .ContainerName}} {{with $d := .Message | tryParseJSON}}{{toRFC3339Nano $d.timestamp}} [{{levelColor $d.level}}] {{$d.message}}{{if $d.data}}{{"\n"}}  data: {{$d.data}}{{end}}{{if $d.stack}}{{"\n"}}{{$d.stack}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}' "$@"
 }
 
+function cc()
+{
+  [ -L compile_commands.json ] || { echo "Go to source root"; return}
+  cmake -B build/local -DBUILD_SERVER=ON -DBUILD_TESTS=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DVCPKG_ROOT=$HOME/repos/vcpkg
+}
+
+function ccc()
+{
+  [ -L compile_commands.json ] || { echo "Go to source root"; return}
+  rm -rf build/local
+  cc
+}
+
 function pullpr()
 {
   remote_url=$(git config --get remote.origin.url)
