@@ -30,9 +30,9 @@ function st()
   stern --stdin --template='{{with $d := .Message | tryParseJSON}}{{toRFC3339Nano $d.timestamp}} [{{levelColor $d.level}}] {{$d.message}}{{if $d.stack}}{{"\n"}}{{$d.stack}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}'
 }
 
-function c()
+function tl()
 {
-  cl --template='{{color .ContainerColor .ContainerName}} {{with $d := .Message | tryParseJSON}}{{toRFC3339Nano $d.timestamp}} [{{levelColor $d.level}}] {{$d.message}}{{if $d.data}}{{"\n"}}  data: {{$d.data}}{{end}}{{if $d.stack}}{{"\n"}}{{$d.stack}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}' "$@"
+  tailfin --template='{{color .ContainerColor .ContainerName}} {{with $d := .Message | tryParseJSON}}{{msToRFC3339Nano $d.time}} [{{or (bunyanLevelColor $d.level) (levelColor $d.level)}}] {{or $d.message $d.msg}}{{if $d.data}}{{"\n"}}  data: {{$d.data}}{{end}}{{if $d.stack}}{{"\n"}}{{$d.stack}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}' "$@"
 }
 
 function cc()
