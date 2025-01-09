@@ -2,7 +2,7 @@ export prompt_color="$fg_brown"
 
 # fd -> fdfind in Mint
 alias fd=fdfind
-alias aga='ag --hidden'
+alias aga='ag --hidden --ignore node_modules'
 alias suspend='slock &; systemctl suspend'
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden -E "*Test.[ch]pp" -E ".git"'
 
