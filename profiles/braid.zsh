@@ -32,7 +32,7 @@ function st()
 
 function tl()
 {
-  tailfin --template='{{color .ContainerColor .ContainerName}} {{with $d := .Message | tryParseJSON}}{{msToRFC3339Nano $d.time}} [{{or (bunyanLevelColor $d.level) (levelColor $d.level)}}] {{or $d.message $d.msg}}{{if $d.data}}{{"\n"}}  data: {{$d.data}}{{end}}{{if $d.stack}}{{"\n"}}{{$d.stack}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}' "$@"
+  tailfin --template='{{color .ContainerColor .ServiceName}} {{with $d := .Message | tryParseJSON}}{{msToRFC3339Nano $d.time}} [{{or (bunyanLevelColor $d.level) (levelColor $d.level)}}] {{or $d.message $d.msg}}{{if $d.data}}{{"\n"}}  data: {{$d.data}}{{end}}{{if $d.stack}}{{"\n"}}{{$d.stack}}{{else if (and $d.err $d.err.stack)}}{{"\n"}}{{$d.err.stack}}{{end}}{{else}}{{.Message}}{{end}}{{"\n"}}' "$@"
 }
 
 function cc()
