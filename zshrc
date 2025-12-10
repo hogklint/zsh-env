@@ -40,6 +40,7 @@ export LESS=-Xr
 export HISTSIZE=2000000
 export SAVEHIST=2000000
 export HISTFILE=~/.zhistory
+export HISTORY_IGNORE="*___BEGIN___COMMAND_OUTPUT_MARKER___*"
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export GPG_TTY=$(tty)
