@@ -1,9 +1,11 @@
 export prompt_color="$fg_brown"
+export TURBO_UI=0
 
 # fd -> fdfind in Mint
 alias fd=fdfind
 alias aga='ag --hidden --ignore node_modules'
 alias suspend='slock &; systemctl suspend'
+alias p='cd $HOME/te/calendar-integration'
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden -E "*Test.[ch]pp" -E ".git"'
 
 export N_PREFIX=$HOME/.cache/n
@@ -13,6 +15,10 @@ export PATH=$N_PREFIX/bin:$HOME/.pulumi/bin:$PATH
 export COREPACK_ENABLE_AUTO_PIN=0
 
 # add Pulumi to the PATH
+if [ -d "$HOME/repos/tetools/bin" ];
+then
+  PATH="$HOME/repos/tetools/bin:$PATH"
+fi
 export PATH=$PATH:$HOME/.pulumi/bin
 
 source /usr/share/autojump/autojump.sh
