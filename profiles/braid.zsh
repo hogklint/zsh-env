@@ -6,6 +6,8 @@ alias fd=fdfind
 alias aga='ag --hidden --ignore node_modules'
 alias suspend='slock &; systemctl suspend'
 alias p='cd $HOME/te/calendar-integration'
+alias å='cd $HOME/te/event-megaphone'
+alias pgg="pgcli postgres://postgres:postgres@localhost:5432/te-ctl --init-command 'set search_path to \"tenant-656459406cc7746e89ccf489\";'"
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden -E "*Test.[ch]pp" -E ".git"'
 
 export N_PREFIX=$HOME/.cache/n
@@ -84,4 +86,9 @@ function pullpr()
     git fetch origin "$pull_prefix/$pr/head:pr$pr-$i"
     git checkout "pr$pr-$i"
   done
+}
+
+function pg()
+{
+  psql postgres://postgres:postgres@localhost:5432/te-ctl -c 'set search_path to "tenant-656459406cc7746e89ccf489";' -c "$@"
 }
