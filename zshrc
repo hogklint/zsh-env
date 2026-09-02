@@ -14,10 +14,12 @@ alias gp='git pull'
 alias gdc='git diff --cached'
 alias gg='git grep -W'
 alias ncal='ncal -M3'
-alias hi='ag --passthrough'
+alias hi='rg --passthrough'
+alias rgt="rg -g '!*spec.ts'"
 alias pe='path-extractor'
 alias ssh='ssh -o AddKeysToAgent=yes'
 alias fda='fd --no-ignore-vcs --hidden'
+alias vim='nvim'
 
 bindkey -e
 bindkey "^W" "vi-backward-kill-word"
