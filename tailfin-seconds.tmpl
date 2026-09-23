@@ -1,0 +1,17 @@
+{{color .ContainerColor .ServiceName}}: {{ $d := tryParseJSON .Message -}}
+{{- if $d -}}
+  {{toRFC3339Nano (or $d.timestamp $d.ts) }} [{{or (bunyanLevelColor $d.level) (levelColor $d.level)}}] {{or $d.message $d.msg}}
+  {{- range $k, $v := $d -}}
+    {{- if and
+       (ne $k "msg")
+       (ne $k "message")
+       (ne $k "timestamp")
+       (ne $k "ts")
+       (ne $k "level")
+    -}}
+      {{"\n"}}    {{colorCyan $k}}={{ $v -}}
+    {{ end -}}
+  {{- end -}}
+{{- else -}}
+  {{- .Message -}}
+{{- end }}

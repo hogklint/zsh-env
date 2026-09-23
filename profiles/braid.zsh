@@ -9,6 +9,7 @@ alias p='cd $HOME/te/calendar-integration'
 alias å='cd $HOME/te/event-megaphone'
 alias pgg="pgcli postgres://postgres:postgres@localhost:5432/te-ctl --init-command 'set search_path to \"tenant-656459406cc7746e89ccf489\";'"
 alias opencode="$HOME/repos/opencode-bwrap/opencode-bwrap"
+alias tls="tailfin --template-file $HOME/.zsh/tailfin-seconds.tmpl"
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden -E "*Test.[ch]pp" -E ".git"'
 
 export PATH=$HOME/.pulumi/bin:$PATH
